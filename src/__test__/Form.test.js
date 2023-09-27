@@ -32,8 +32,8 @@ test("btn should be enabled for non empty name", () => {
     fireEvent.change(nameInput, {'target': {'value': ''}})
     const btn = getByRole('button', {name: 'Submit'})
     expect(btn).toHaveAttribute('disabled');
-    debug(btn)
+    //debug(btn)
     fireEvent.change(nameInput, {'target': {'value': 'sofi'}})
-    debug(btn)
+    //debug(btn)
     expect(btn).not.toHaveAttribute('disabled');
 })
