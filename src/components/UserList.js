@@ -1,9 +1,11 @@
  function UserList({ users }) {
     const renderedUsers = users.map((user) => {
-        return <tr key={user.name}>
+        return (
+        <tr key={user.name}>
             <td>{user.name}</td>
             <td>{user.email}</td>
         </tr>
+        )
     });
 
     return (
@@ -14,7 +16,7 @@
                 <th>Email</th>
             </tr>
         </thead>
-            <tbody>
+            <tbody data-testid="users">
                 {renderedUsers}
             </tbody>
     </table>
