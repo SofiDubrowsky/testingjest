@@ -16,9 +16,7 @@
                 <th>Email</th>
             </tr>
         </thead>
-            <tbody data-testid="users">
-                {renderedUsers}
-            </tbody>
+            <tbody data-testid="users">{renderedUsers}</tbody>
     </table>
     )
  }
