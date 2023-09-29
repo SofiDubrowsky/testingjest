@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, act} from '@testing-library/react';
 import user from '@testing-library/user-event'
 import App from '../App'
 
@@ -13,12 +13,14 @@ test('can receive a new user and show it on a list', async () => {
     });
     const button = screen.getByRole('button');
 
-    user.click(nameInput);
-    user.keyboard('jane');
-    user.click(emailInput);
-    user.keyboard('jane@gmail.com'); 
-
-    user.click(button);
+    act(()=>{
+        user.click(nameInput);
+        user.keyboard('jane');
+        user.click(emailInput);
+        user.keyboard('jane@gmail.com'); 
+        
+        user.click(button);
+    })
 
     await screen.findByText('jane');
     await screen.findByText('jane@gmail.com');

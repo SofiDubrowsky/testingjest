@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react'
+import { render, screen, within, act } from '@testing-library/react'
 import user from '@testing-library/user-event'
 import UserForm from '../components/UserForm'
 
@@ -29,19 +29,23 @@ test('it calls onUserAdd when the form is submitted', () => {
         name:/email/i,
     });
 
-    //Simulat typing in a name
-    user.click(nameInput);
-    user.keyboard('jane');
-
-    //Simulate typing an emal
-    user.click(emailInput);
-    user.keyboard('jane@gmail.com'); 
+    act(()=>{
+        //Simulat typing in a name
+        user.click(nameInput);
+        user.keyboard('jane');
+    
+        //Simulate typing an emal
+        user.click(emailInput);
+        user.keyboard('jane@gmail.com'); 
+    })
 
     //Find the button 
     const button = screen.getByRole('button');
 
-    //Simulete clicking thw button
-    user.click(button);
+    act(()=>{
+        //Simulete clicking thw button
+        user.click(button);
+    })
 
     //Assertion to make sure 'onUserAdd' gets called with email/name
     expect(mock).toHaveBeenCalled();
@@ -55,12 +59,19 @@ test('empties the two inputs when form is submitted',async ()=>{
     const emailInput= screen.getByRole('textbox',{name:/email/i});
     const button= screen.getByRole('button');
 
-    user.click(nameInput)
-    user.keyboard('jane')
-    user.click(emailInput)
-    user.keyboard('jane@jane.com')
+    act(()=>{
+        //Simulat typing in a name
+        user.click(nameInput);
+        user.keyboard('jane');
+    
+        //Simulate typing an emal
+        user.click(emailInput);
+        user.keyboard('jane@gmail.com'); 
+    })
 
-    await user.click(button)
+    await act(async () => {
+        await user.click(button);
+      });
 
     expect(nameInput).toHaveValue('');
     expect(emailInput).toHaveValue('');
